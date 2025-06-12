@@ -25,6 +25,7 @@ register_error_handlers(app)
 #-----------------------------------------------------------
 @app.get("/")
 def index():
+
     return render_template("pages/home.jinja")
 
 
