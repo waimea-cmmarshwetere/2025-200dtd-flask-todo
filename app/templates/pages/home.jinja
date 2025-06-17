@@ -22,12 +22,10 @@
     <article>
 
         <ul>
-            {% for thing in things %}
+            {% for task in tasks %}
 
                 <li>
-                    <a href="/thing/{{ thing.id }}">
-                        {{ thing.name }}
-                    </a>
+                    {{ task.name }}
                 </li>
 
             {% else %}

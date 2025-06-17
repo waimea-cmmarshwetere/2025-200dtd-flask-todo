@@ -10,3 +10,8 @@ libsql-client
 
 # Environment Variables
 python-dotenv
+
+# colored text
+colorama
+
+
