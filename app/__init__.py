@@ -42,21 +42,21 @@ def index():
 @app.post("/add")
 def add_a_thing():
     # Get the data from the form
-    task  = request.form.get("task")
+    name  = request.form.get("name")
     priority = request.form.get("priority")
 
     # Sanitise the inputs
-    task = html.escape(task)
+    name = html.escape(name)
     priority = html.escape(priority)
 
     with connect_db() as client:
         # Add the thing to the DB
-        sql = "INSERT INTO things (name, priority) VALUES (?, ?)"
-        values = [task, priority]
+        sql = "INSERT INTO tasks (name, priority) VALUES (?, ?)"
+        values = [name, priority]
         client.execute(sql, values)
 
         # Go back to the home page
-        flash(f"Thing '{task}' added", "success")
+        flash(f"task '{name}' added", "success")
         return redirect("/")
 
 
@@ -67,12 +67,38 @@ def add_a_thing():
 def delete_a_thing(id):
     with connect_db() as client:
         # Delete the thing from the DB
-        sql = "DELETE FROM things WHERE id=?"
+        sql = "DELETE FROM tasks WHERE id=?"
         values = [id]
         client.execute(sql, values)
 
         # Go back to the home page
-        flash("Thing deleted", "warning")
-        return redirect("/things")
+        flash("Tasks deleted", "warning")
+        return redirect("/tasks")
+#-----------------------------------------------------------
+# Complete
+#-----------------------------------------------------------
+@app.get("/complete/<int:id>")
+def completeT(id):
+    with connect_db() as client:
+        sql = "UPDATE tasks set complete=? WHERE=?"
+        values = [1, id]
+        client.execute(sql, values)
+
+
+        return redirect("/")
+#-----------------------------------------------------------
+# Incomplete
+#-----------------------------------------------------------
+@app.get("/incomplete/<int:id>")
+def incompleteT(id):
+    with connect_db() as client:
+        sql = "UPDATE tasks set complete=? WHERE=?"
+        values = [0, id]
+        client.execute(sql, values)
+
+
+        return redirect("/")
+
+
 
 
