@@ -33,10 +33,10 @@
                     {{ task.priority }} 
 
                     {% if task.complete %} 
-                    <a href="incompleteT/{{task.id}}"> 🗹  </a>
+                        <a href="completeT/{{task.id}}"> 🗹  </a>
                        
                     {% else %} 
-                         <a href="completeT/{{task.id}}"> ☐  </a>
+                         <a href="incompleteT/{{task.id}}"> ☐  </a>
                     {% endif %}
 
                 </li>

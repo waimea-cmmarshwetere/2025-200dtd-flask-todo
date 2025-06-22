@@ -80,7 +80,7 @@ def delete_a_thing(id):
 @app.get("/complete/<int:id>")
 def completeT(id):
     with connect_db() as client:
-        sql = "UPDATE tasks set complete=? WHERE=?"
+        sql = "UPDATE tasks set complete=? WHERE id=?"
         values = [1, id]
         client.execute(sql, values)
 
@@ -92,12 +92,12 @@ def completeT(id):
 @app.get("/incomplete/<int:id>")
 def incompleteT(id):
     with connect_db() as client:
-        sql = "UPDATE tasks set complete=? WHERE=?"
+        sql = "UPDATE tasks set complete=? WHERE id=?"
         values = [0, id]
         client.execute(sql, values)
 
 
-        return redirect("/")
+        return redirect("/") 
 
 
 
